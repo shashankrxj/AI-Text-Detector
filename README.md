@@ -47,3 +47,8 @@ http://127.0.0.1:5000 or http:localhost:5000
 3. Enter the text you want to analyze.<br>
 4. Click the "Submit" button.<br>
 5. The model will provide a prediction for the input text.<br>
+
+## License
+This project is licensed under the [MIT License](https://github.com/shashankrxj/AI-Text-Detector?tab=MIT-1-ov-file). See the LICENSE file for details.
+
+
