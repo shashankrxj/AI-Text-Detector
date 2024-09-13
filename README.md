@@ -14,35 +14,36 @@ The original code for training these models can be found in my other repository:
 ## Model Description
 • **Unigram Model**: Combines Logistic Regression and Naive Bayes models.<br>
 • **Bigram Model**: Combines LightGBM and Random Forest models.<br>
+
 The model takes the input text, processes it with TF-IDF vectorizers (unigram or bigram depending on the selection), and provides a combined prediction result.
 
 ## Installation
 
 To run the project locally, follow these steps:
-1.Clone the repository:
+1. Clone the repository:
 ```HTML
  git clone https://github.com/shashankrxj/AI-Text-Detector.git
 ```
-2.Navigate to the project directory:
+2. Navigate to the project directory:
 ```HTML
 cd AI-Text-Detector
 ```
-3.Install dependencies:
+3. Install dependencies:
 ```HTML
 pip install -r requirements.txt
 ```
-4.Start the Flask server:
+4. Start the Flask server:
 ```HTML
 python app.py
 ```
-5.Open your browser and visit:
+5. Open your browser and visit:
 ```HTML
 http://127.0.0.1:5000 or http:localhost:5000
 ```
 
 ## Usage
-Open the app in your browser.<br>
-Choose between the Unigram or Bigram model.<br>
-Enter the text you want to analyze.<br>
-Click the "Submit" button.<br>
-The model will provide a prediction for the input text.<br>
+1. Open the app in your browser.<br>
+2. Choose between the Unigram or Bigram model.<br>
+3. Enter the text you want to analyze.<br>
+4. Click the "Submit" button.<br>
+5. The model will provide a prediction for the input text.<br>
