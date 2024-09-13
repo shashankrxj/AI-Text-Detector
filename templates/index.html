@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Detection</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+    <!-- Background for digital rain effect -->
+    <div id="digital-rain-background"></div>
+
+    <div class="header">
+        <h1>AI Text Detector</h1> 
+    </div>
+
+    <form id="ai-text-detection-form">
+        <div class="big-div">
+            <div class="big-div2">
+                <div class="big-div3">
+                    <input type="radio" id="unigram" name="model" value="unigram">
+                    <label for="unigram">Unigram</label>
+                </div>
+                <div class="big-div4">
+                    <input type="radio" id="bigram" name="model" value="bigram">
+                    <label for="bigram">Bigram</label>
+                </div>
+                <div class="big-div5">
+                    <textarea id="text-input" placeholder="Select any Model from above and Write your text here..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="middle-div">
+            <div class="doted"></div>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <button class="submit-button" type="submit">Submit</button>
+        </div>
+    </form>
+
+    <div class="last-div">
+        <div class="last-div2">
+            <canvas id="Matrix"></canvas>
+            <div class="overlay" id="overlay">Prediction will appear here</div>
+        </div>
+    </div>
+
+    <script src="../static/matrix.js"></script>
+    <script src="../static/digital-rain.js"></script>
+
+    <!-- jQuery AJAX form submission -->
+    <script>
+     $(document).ready(function() {
+    $('#ai-text-detection-form').on('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get form data
+        const model = $('input[name="model"]:checked').val();
+        const text = $('#text-input').val().trim(); // Trim whitespace
+
+        // Validation
+        if (!model) {
+            alert('Please select a model.');
+            return;
+        }
+
+        if (!text) {
+            alert('Please write some text.');
+            return;
+        }
+
+        const formData = {
+            model: model,
+            text: text
+        };
+
+        // Hide the submit button and show the dots
+        $('.submit-button').hide();
+        $('.doted').show();
+
+        // Send data to the backend
+        $.ajax({
+            type: 'POST',
+            url: '/predict', // Update this URL with your backend endpoint
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log('Success:', response);
+
+                // Determine which probability to use based on the selected model
+                let combinedProb;
+                if (model === 'unigram') {
+                    combinedProb = response.combined_probs_uni; // Extract value from response
+                } else if (model === 'bigram') {
+                    combinedProb = response.combined_probs_bi; // Adjust this if you have similar for bigram
+                }
+
+                // Convert the probability to percentage and round to 2 decimal points
+                combinedProb = combinedProb !== undefined ? (combinedProb * 100).toFixed(2) : 'No result';
+
+                // Delay displaying the result for 3 seconds
+                setTimeout(function() {
+                    // Update the overlay with the combined probability in percentage
+                    $('.overlay').html(`${model.charAt(0).toUpperCase() + model.slice(1)} Probability: ${combinedProb}%`);
+
+                    // Hide dots and show the submit button after the result is displayed
+                    $('.doted').hide();
+                    $('.submit-button').show();
+                }, 3000);
+            },
+            error: function(error) {
+                console.error('Error:', error);
+
+                // Delay displaying the error message for 3 seconds
+                setTimeout(function() {
+                    $('.overlay').html('Error fetching prediction');
+
+                    // Hide dots and show the submit button after 3 seconds
+                    $('.doted').hide();
+                    $('.submit-button').show();
+                }, 3000);
+            }
+        });
+    });
+});
+
+    </script>
+
+</body>
+</html>
