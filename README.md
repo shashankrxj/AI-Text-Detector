@@ -17,6 +17,9 @@ The original code for training these models can be found in my other repository:
 
 The model takes the input text, processes it with TF-IDF vectorizers (unigram or bigram depending on the selection), and provides a combined prediction result.
 
+## Dataset Information
+The models were trained on a dataset consisting of 4.5 lakh (450,000+) text samples, including both AI-generated and human-written content. The dataset covers a variety of topics and text lengths to ensure robustness. The dataset used for training can be found here on [Kaggle](https://www.kaggle.com/datasets/shanegerami/ai-vs-human-text). However, due to the growing complexity of AI-generated content, the model requires further training to enhance its accuracy across a wider range of texts.
+
 ## Installation
 
 To run the project locally, follow these steps:
@@ -43,10 +46,17 @@ http://127.0.0.1:5000 or http:localhost:5000
 
 ## Usage
 1. Open the app in your browser.<br>
-2. Choose between the Unigram or Bigram model.<br>
+2. Choose between the **Unigram** or **Bigram model**.<br>
 3. Enter the text you want to analyze.<br>
-4. Click the "Submit" button.<br>
+4. Click the **"Submit" button.<br>
 5. The model will provide a prediction for the input text.<br>
+
+## Image
+Frontend will look like this.
+![AI-Text-Detector-Image](https://github.com/user-attachments/assets/af3e699d-9de4-4c7b-81fc-e81fb81a3e0f)
+
+## Disclaimer
+The model is trained on a dataset of 4.5 lakh text samples, but it is still evolving and may need more data to achieve higher accuracy in predicting whether text is AI-generated or human-written. As such, predictions might be incorrect in some cases. Please use the results with caution, especially in critical applications.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/shashankrxj/AI-Text-Detector?tab=MIT-1-ov-file). See the LICENSE file for details.
